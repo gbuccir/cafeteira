@@ -1,6 +1,7 @@
 package com.cafeteira.cafeteira.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
@@ -29,9 +30,23 @@ public class CafeteiraModel implements Serializable{
     @Column(length = 50)
     private String cafeteira_modelo;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private LocalDateTime cafeteira_dthrcadastro;
     @Column
-    private CafeteiraTipoEnum cafeteira_tipo;
+    private LocalDateTime cafeteira_dthrinativacao;
     
+    public LocalDateTime getCafeteira_dthrcadastro() {
+        return cafeteira_dthrcadastro;
+    }
+    public void setCafeteira_dthrcadastro(LocalDateTime cafeteira_dthrcadastro) {
+        this.cafeteira_dthrcadastro = cafeteira_dthrcadastro;
+    }
+    public LocalDateTime getCafeteira_dthrinativacao() {
+        return cafeteira_dthrinativacao;
+    }
+    public void setCafeteira_dthrinativacao(LocalDateTime cafeteira_dthrinativacao) {
+        this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
+    }
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
