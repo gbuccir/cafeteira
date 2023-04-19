@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -73,12 +71,5 @@ public class CafeteiraModel implements Serializable{
     }
     public void setCafeteira_modelo(String cafeteira_modelo) {
         this.cafeteira_modelo = cafeteira_modelo;
-    }
-    public CafeteiraTipoEnum getCafeteira_tipo() {
-        return cafeteira_tipo;
-    }
-    public void setCafeteira_tipo(CafeteiraTipoEnum cafeteira_tipo) {
-        this.cafeteira_tipo = cafeteira_tipo;
-    }
-    
+    }    
 }
