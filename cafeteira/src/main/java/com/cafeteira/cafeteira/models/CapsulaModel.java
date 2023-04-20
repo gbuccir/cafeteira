@@ -6,14 +6,13 @@ import java.util.UUID;
 
 import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,11 +34,10 @@ public class CapsulaModel implements Serializable {
     @Column(nullable = false)
     private LocalDateTime capsula_dthrcadastro;
     @Column
-    private LocalDateTime capsula_dthrinativacao;    
-    @OneToOne(cascade = CascadeType.ALL)
+    private LocalDateTime capsula_dthrinativacao;
+    @ManyToOne
     @JoinColumn(name = "tipocapsula_id")
     private TipoCapsulaModel tipoCapsulaModel;
-
 
     public LocalDateTime getCapsula_dthrcadastro() {
         return capsula_dthrcadastro;
