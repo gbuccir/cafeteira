@@ -2,7 +2,6 @@ package com.cafeteira.cafeteira.models;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
 
@@ -22,7 +21,8 @@ public class CapsulaModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID capsula_id;
+    @Column(columnDefinition = "serial")
+    private Long capsula_id;
     @Column(length = 50)
     private String capsula_nome;
     @Column(nullable = false)
@@ -67,11 +67,11 @@ public class CapsulaModel implements Serializable {
         return serialVersionUID;
     }
 
-    public UUID getCapsula_id() {
+    public Long getCapsula_id() {
         return capsula_id;
     }
 
-    public void setCapsula_id(UUID capsula_id) {
+    public void setCapsula_id(Long capsula_id) {
         this.capsula_id = capsula_id;
     }
 

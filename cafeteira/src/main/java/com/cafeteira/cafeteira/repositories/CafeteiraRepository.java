@@ -1,11 +1,9 @@
 package com.cafeteira.cafeteira.repositories;
 
-import java.util.UUID;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cafeteira.cafeteira.models.CafeteiraModel;
 
-public interface CafeteiraRepository extends JpaRepository<CafeteiraModel, UUID>{
+public interface CafeteiraRepository extends JpaRepository<CafeteiraModel, Long>{
     
 }

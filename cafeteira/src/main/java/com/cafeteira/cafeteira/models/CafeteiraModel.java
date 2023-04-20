@@ -3,8 +3,8 @@ package com.cafeteira.cafeteira.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +20,8 @@ public class CafeteiraModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID cafeteira_id;
+    @Column(columnDefinition = "serial")
+    private Long cafeteira_id;
     @Column(nullable = false, length = 50)
     private String cafeteira_nome;
     @Column(length = 50)
@@ -31,7 +32,7 @@ public class CafeteiraModel implements Serializable {
     private LocalDateTime cafeteira_dthrcadastro;
     @Column
     private LocalDateTime cafeteira_dthrinativacao;
-    @ManyToMany(mappedBy = "cafeteiraList")
+    @ManyToMany(mappedBy = "cafeteiraList", cascade = CascadeType.ALL)
     private List<TipoCapsulaModel> tipoCapsulaList;
 
     public LocalDateTime getCafeteira_dthrcadastro() {
@@ -54,11 +55,11 @@ public class CafeteiraModel implements Serializable {
         return serialVersionUID;
     }
 
-    public UUID getCafeteira_id() {
+    public Long getCafeteira_id() {
         return cafeteira_id;
     }
 
-    public void setCafeteira_id(UUID cafeteira_id) {
+    public void setCafeteira_id(Long cafeteira_id) {
         this.cafeteira_id = cafeteira_id;
     }
 

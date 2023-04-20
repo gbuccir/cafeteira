@@ -3,12 +3,12 @@ package com.cafeteira.cafeteira.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,13 +16,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "tipocapsula")
 public class TipoCapsulaModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID tipocapsula_id;
+    @Column(columnDefinition = "serial")
+    private Long tipocapsula_id;
     @Column(nullable = false)
     private CafeteiraTipoEnum tipocapsula_tipo;
     @Column(nullable = false)
@@ -33,18 +37,18 @@ public class TipoCapsulaModel implements Serializable {
     private List<CapsulaModel> capsulaModel;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cafeteiratpcapsula", joinColumns = @JoinColumn(name = "cafeteira_id", referencedColumnName = "cafeteira_id"), inverseJoinColumns = @JoinColumn(name = "tipocapsula_id", referencedColumnName = "tipocapsula_id"))
+    @JoinTable(name = "cafeteiratpcapsula", joinColumns = @JoinColumn(name = "tipocapsula_id", referencedColumnName = "tipocapsula_id"), inverseJoinColumns = @JoinColumn(name = "cafeteira_id", referencedColumnName = "cafeteira_id"))
     private List<CafeteiraModel> cafeteiraList;
 
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public UUID getTipocapsula_id() {
+    public Long getTipocapsula_id() {
         return tipocapsula_id;
     }
 
-    public void setTipocapsula_id(UUID tipocapsula_id) {
+    public void setTipocapsula_id(Long tipocapsula_id) {
         this.tipocapsula_id = tipocapsula_id;
     }
 
