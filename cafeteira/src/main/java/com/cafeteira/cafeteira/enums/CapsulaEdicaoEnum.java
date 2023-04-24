@@ -1,11 +1,19 @@
 package com.cafeteira.cafeteira.enums;
 
 public enum CapsulaEdicaoEnum {
-    Inspirazione("Inspirazione"),
-    Origin("Origin"),
+    InspirazioneItaliana("InspirazioneItaliana"),
+    MasterOrigin("MasterOrigin"),
     Espresso("Espresso"),
-    WorldExplanation("WorldExplanation"),
-    Barista("Barista");
+    WorldExplonation("WorldExplonation"),
+    BaristaCreations("BaristaCreations"),
+    Limitada("Limitada"),
+    Signature("Signature"),
+    Alto("Alto"),
+    DoubleEspresso("DoubleEspresso"),
+    GranLungo("GranLungo"),
+    CraftBrew("CraftBrew");
+
+
 
     private String capsulaEdicao;
 

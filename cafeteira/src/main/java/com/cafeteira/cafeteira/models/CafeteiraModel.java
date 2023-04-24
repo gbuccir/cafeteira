@@ -15,8 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cafeteira")
-public class CafeteiraModel implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CafeteiraModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,56 +34,52 @@ public class CafeteiraModel implements Serializable {
     @ManyToMany(mappedBy = "cafeteiraList", cascade = CascadeType.ALL)
     private List<TipoCapsulaModel> tipoCapsulaList;
 
-    public LocalDateTime getCafeteira_dthrcadastro() {
-        return cafeteira_dthrcadastro;
-    }
-
-    public void setCafeteira_dthrcadastro(LocalDateTime cafeteira_dthrcadastro) {
-        this.cafeteira_dthrcadastro = cafeteira_dthrcadastro;
-    }
-
-    public LocalDateTime getCafeteira_dthrinativacao() {
-        return cafeteira_dthrinativacao;
-    }
-
-    public void setCafeteira_dthrinativacao(LocalDateTime cafeteira_dthrinativacao) {
-        this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public Long getCafeteira_id() {
+    public Long getId() {
         return cafeteira_id;
     }
 
-    public void setCafeteira_id(Long cafeteira_id) {
+    public void setId(Long cafeteira_id) {
         this.cafeteira_id = cafeteira_id;
     }
 
-    public String getCafeteira_nome() {
+    public String getNome() {
         return cafeteira_nome;
     }
 
-    public void setCafeteira_nome(String cafeteira_nome) {
+    public void setNome(String cafeteira_nome) {
         this.cafeteira_nome = cafeteira_nome;
     }
 
-    public String getCafeteira_cor() {
+    public String getCor() {
         return cafeteira_cor;
     }
 
-    public void setCafeteira_cor(String cafeteira_cor) {
+    public void setCor(String cafeteira_cor) {
         this.cafeteira_cor = cafeteira_cor;
     }
 
-    public String getCafeteira_modelo() {
+    public String getModelo() {
         return cafeteira_modelo;
     }
 
-    public void setCafeteira_modelo(String cafeteira_modelo) {
+    public void setModelo(String cafeteira_modelo) {
         this.cafeteira_modelo = cafeteira_modelo;
+    }
+
+    public LocalDateTime getDthrcadastro() {
+        return cafeteira_dthrcadastro;
+    }
+
+    public void setDthrcadastro(LocalDateTime cafeteira_dthrcadastro) {
+        this.cafeteira_dthrcadastro = cafeteira_dthrcadastro;
+    }
+
+    public LocalDateTime getDthrinativacao() {
+        return cafeteira_dthrinativacao;
+    }
+
+    public void setDthrinativacao(LocalDateTime cafeteira_dthrinativacao) {
+        this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
     }
 
     public List<TipoCapsulaModel> getTipoCapsulaList() {

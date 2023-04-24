@@ -1,6 +1,5 @@
 package com.cafeteira.cafeteira.models;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.cafeteira.cafeteira.enums.CapsulaEdicaoEnum;
@@ -16,8 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "capsula")
-public class CapsulaModel implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class CapsulaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,8 +25,8 @@ public class CapsulaModel implements Serializable {
     private String capsula_nome;
     @Column(nullable = false)
     private Integer capsula_intensidade;
-    @Column
-    private CapsulaEdicaoEnum capsula_edicao;
+    // @Column
+    // private CapsulaEdicaoEnum capsula_edicao;
     @Column(nullable = false)
     private String capsula_tamanho;
     @Column(nullable = false)
@@ -38,76 +36,71 @@ public class CapsulaModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tipocapsula_id")
     private TipoCapsulaModel tipoCapsulaModel;
+    @ManyToOne
+    @JoinColumn(name = "edicaocapsula_id")
+    private EdicaoCapsulaModel edicaoCapsulaModel;
 
-    public Long getCapsula_id() {
+    public Long getId() {
         return capsula_id;
     }
 
-    public void setCapsula_id(Long capsula_id) {
+    public void setId(Long capsula_id) {
         this.capsula_id = capsula_id;
     }
 
-    public LocalDateTime getCapsulaDthrcadastro() {
+    public LocalDateTime getDthrcadastro() {
         return capsula_dthrcadastro;
     }
 
-    public void setCapsula_dthrcadastro(LocalDateTime capsula_dthrcadastro) {
+    public void setDthrcadastro(LocalDateTime capsula_dthrcadastro) {
         this.capsula_dthrcadastro = capsula_dthrcadastro;
     }
 
-    public LocalDateTime getCapsulaDthrinativacao() {
+    public LocalDateTime getDthrinativacao() {
         return capsula_dthrinativacao;
     }
 
-    public void setCapsulaDthrinativacao(LocalDateTime capsula_dthrinativacao) {
+    public void setDthrinativacao(LocalDateTime capsula_dthrinativacao) {
         this.capsula_dthrinativacao = capsula_dthrinativacao;
     }
 
-    public TipoCapsulaModel getTipoCapsulaModel() {
+    public TipoCapsulaModel getTipoCapsula() {
         return tipoCapsulaModel;
     }
 
-    public void setTipoCapsulaModel(TipoCapsulaModel tipoCapsulaModel) {
+    public void setTipoCapsula(TipoCapsulaModel tipoCapsulaModel) {
         this.tipoCapsulaModel = tipoCapsulaModel;
     }
 
-    public Long getCapsulaId() {
-        return capsula_id;
-    }
-
-    public void setCapsulaId(Long capsula_id) {
-        this.capsula_id = capsula_id;
-    }
-
-    public String getCapsulaNome() {
+    public String getNome() {
         return capsula_nome;
     }
 
-    public void setCapsulaNome(String capsula_nome) {
+    public void setNome(String capsula_nome) {
         this.capsula_nome = capsula_nome;
     }
 
-    public Integer getCapsulaIntensidade() {
+    public Integer getIntensidade() {
         return capsula_intensidade;
     }
 
-    public void setCapsulaIntensidade(Integer capsula_intensidade) {
+    public void setIntensidade(Integer capsula_intensidade) {
         this.capsula_intensidade = capsula_intensidade;
     }
 
-    public CapsulaEdicaoEnum getCafeteiraEdicao() {
-        return capsula_edicao;
-    }
+    // public CapsulaEdicaoEnum getEdicao() {
+    //     return capsula_edicao;
+    // }
 
-    public void setCafeteiraEdicao(CapsulaEdicaoEnum capsula_edicao) {
-        this.capsula_edicao = capsula_edicao;
-    }
+    // public void setEdicao(CapsulaEdicaoEnum capsula_edicao) {
+    //     this.capsula_edicao = capsula_edicao;
+    // }
 
-    public String getCapsulaTamanho() {
+    public String getTamanho() {
         return capsula_tamanho;
     }
 
-    public void setCapsulaTamanho(String capsula_tamanho) {
+    public void setTamanho(String capsula_tamanho) {
         this.capsula_tamanho = capsula_tamanho;
     }
 }

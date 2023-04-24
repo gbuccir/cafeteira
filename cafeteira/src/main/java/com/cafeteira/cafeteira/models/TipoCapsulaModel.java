@@ -1,6 +1,5 @@
 package com.cafeteira.cafeteira.models;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,8 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tipocapsula")
-public class TipoCapsulaModel implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class TipoCapsulaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,47 +38,43 @@ public class TipoCapsulaModel implements Serializable {
     @JoinTable(name = "cafeteiratpcapsula", joinColumns = @JoinColumn(name = "tipocapsula_id", referencedColumnName = "tipocapsula_id"), inverseJoinColumns = @JoinColumn(name = "cafeteira_id", referencedColumnName = "cafeteira_id"))
     private List<CafeteiraModel> cafeteiraList;
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
-    public Long getTipocapsula_id() {
+    public Long getId() {
         return tipocapsula_id;
     }
 
-    public void setTipocapsula_id(Long tipocapsula_id) {
+    public void setId(Long tipocapsula_id) {
         this.tipocapsula_id = tipocapsula_id;
     }
 
-    public CafeteiraTipoEnum getTipocapsula_tipo() {
+    public CafeteiraTipoEnum getTipo() {
         return tipocapsula_tipo;
     }
 
-    public void setTipocapsula_tipo(CafeteiraTipoEnum tipocapsula_tipo) {
+    public void setTipo(CafeteiraTipoEnum tipocapsula_tipo) {
         this.tipocapsula_tipo = tipocapsula_tipo;
     }
 
-    public LocalDateTime getTipocapsula_dthrcadastro() {
+    public LocalDateTime getDthrcadastro() {
         return tipocapsula_dthrcadastro;
     }
 
-    public void setTipocapsula_dthrcadastro(LocalDateTime tipocapsula_dthrcadastro) {
+    public void setDthrcadastro(LocalDateTime tipocapsula_dthrcadastro) {
         this.tipocapsula_dthrcadastro = tipocapsula_dthrcadastro;
     }
 
-    public LocalDateTime getTipocapsula_dthrinativacao() {
+    public LocalDateTime getDthrinativacao() {
         return tipocapsula_dthrinativacao;
     }
 
-    public void setTipocapsula_dthrinativacao(LocalDateTime tipocapsula_dthrinativacao) {
+    public void setDthrinativacao(LocalDateTime tipocapsula_dthrinativacao) {
         this.tipocapsula_dthrinativacao = tipocapsula_dthrinativacao;
     }
 
-    public List<CapsulaModel> getCapsulaModel() {
+    public List<CapsulaModel> getModel() {
         return capsulaModel;
     }
 
-    public void setCapsulaModel(List<CapsulaModel> capsulaModel) {
+    public void setModel(List<CapsulaModel> capsulaModel) {
         this.capsulaModel = capsulaModel;
     }
 
