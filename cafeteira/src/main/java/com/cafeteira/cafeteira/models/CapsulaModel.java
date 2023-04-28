@@ -33,9 +33,12 @@ public class CapsulaModel {
     private LocalDateTime capsula_dthrcadastro;
     @Column
     private LocalDateTime capsula_dthrinativacao;
+    @Column
+    private Long caftpcap_quantidade;
     @ManyToOne
     @JoinColumn(name = "tipocapsula_id")
     private TipoCapsulaModel tipoCapsulaModel;
+   
     @ManyToOne
     @JoinColumn(name = "edicaocapsula_id")
     private EdicaoCapsulaModel edicaoCapsulaModel;
@@ -102,5 +105,13 @@ public class CapsulaModel {
 
     public void setTamanho(String capsula_tamanho) {
         this.capsula_tamanho = capsula_tamanho;
+    }
+
+    public Long getQuantidade() {
+        return caftpcap_quantidade;
+    }
+
+    public void setQuantidade(Long caftpcap_quantidade) {
+        this.caftpcap_quantidade = caftpcap_quantidade;
     }
 }

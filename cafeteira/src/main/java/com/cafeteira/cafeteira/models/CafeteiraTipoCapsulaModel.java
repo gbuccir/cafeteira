@@ -1,7 +1,5 @@
 package com.cafeteira.cafeteira.models;
 
-import org.apache.tomcat.util.security.PrivilegedSetAccessControlContext;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cafeteiratipocapsula")
 public class CafeteiraTipoCapsulaModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "serial")
@@ -25,16 +23,11 @@ public class CafeteiraTipoCapsulaModel {
     @MapsId("tipocapsula_id")
     @JoinColumn(name = "tipocapsula_id")
     private TipoCapsulaModel tipoCapsulaModel;
-    // private Long tipocapsula_id;
 
     @ManyToOne
     @MapsId("cafeteira_id")
     @JoinColumn(name = "cafeteira_id")
     private CafeteiraModel cafeteiraModel;
-    // private Long cafeteira_id;
-
-    @Column
-    private Long caftpcap_quantidade;
 
     public TipoCapsulaModel getTipoCapsulaModel() {
         return tipoCapsulaModel;
@@ -60,16 +53,6 @@ public class CafeteiraTipoCapsulaModel {
         this.caftpcap_id = caftpcap_id;
     }
 
-    
-
-    public Long getCaftpcap_quantidade() {
-        return caftpcap_quantidade;
-    }
-
-    public void setCaftpcap_quantidade(Long caftpcap_quantidade) {
-        this.caftpcap_quantidade = caftpcap_quantidade;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -77,7 +60,6 @@ public class CafeteiraTipoCapsulaModel {
         result = prime * result + ((caftpcap_id == null) ? 0 : caftpcap_id.hashCode());
         result = prime * result + ((tipoCapsulaModel == null) ? 0 : tipoCapsulaModel.hashCode());
         result = prime * result + ((cafeteiraModel == null) ? 0 : cafeteiraModel.hashCode());
-        result = prime * result + ((caftpcap_quantidade == null) ? 0 : caftpcap_quantidade.hashCode());
         return result;
     }
 
@@ -105,13 +87,7 @@ public class CafeteiraTipoCapsulaModel {
                 return false;
         } else if (!cafeteiraModel.equals(other.cafeteiraModel))
             return false;
-        if (caftpcap_quantidade == null) {
-            if (other.caftpcap_quantidade != null)
-                return false;
-        } else if (!caftpcap_quantidade.equals(other.caftpcap_quantidade))
-            return false;
         return true;
     }
-
 
 }
