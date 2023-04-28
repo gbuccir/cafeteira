@@ -1,17 +1,17 @@
 package com.cafeteira.cafeteira.enums;
 
 public enum CafeteiraTipoEnum {
-    Padrao(1),
-    Viruo(2),
-    Outros(3);
+    Padrao("Padrao"),
+    Virtuo("Virtuo"),
+    Outros("Outros");
 
-    private int cafeteiraTipo;
+    private String cafeteiraTipo;
 
-    private CafeteiraTipoEnum(int cafeteiraTipo) {
+    private CafeteiraTipoEnum(String cafeteiraTipo) {
         this.cafeteiraTipo = cafeteiraTipo;
     }
 
-    public int getCafeteiraTipo() {
+    public String getCafeteiraTipo() {
         return cafeteiraTipo;
     }
 

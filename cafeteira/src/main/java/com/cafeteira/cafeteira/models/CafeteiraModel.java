@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,8 +32,10 @@ public class CafeteiraModel{
     private LocalDateTime cafeteira_dthrcadastro;
     @Column
     private LocalDateTime cafeteira_dthrinativacao;
-    @ManyToMany(mappedBy = "cafeteiraList", cascade = CascadeType.ALL)
-    private List<TipoCapsulaModel> tipoCapsulaList;
+    // @ManyToMany(mappedBy = "cafeteiraList", cascade = CascadeType.ALL)
+    // private List<TipoCapsulaModel> tipoCapsulaList;
+    @OneToMany(mappedBy = "cafeteiraModel")
+    private List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList;
 
     public Long getId() {
         return cafeteira_id;
@@ -82,11 +85,13 @@ public class CafeteiraModel{
         this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
     }
 
-    public List<TipoCapsulaModel> getTipoCapsulaList() {
-        return tipoCapsulaList;
+    public List<CafeteiraTipoCapsulaModel> getCafeteiraTipoCapsulaList() {
+        return cafeteiraTipoCapsulaList;
     }
 
-    public void setTipoCapsulaList(List<TipoCapsulaModel> tipoCapsulaList) {
-        this.tipoCapsulaList = tipoCapsulaList;
+    public void setCafeteiraTipoCapsulaList(List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList) {
+        this.cafeteiraTipoCapsulaList = cafeteiraTipoCapsulaList;
     }
+
+   
 }

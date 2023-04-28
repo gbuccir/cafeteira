@@ -8,6 +8,8 @@ import com.cafeteira.cafeteira.enums.CafeteiraTipoEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +27,7 @@ public class TipoCapsulaModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "serial")
     private Long tipocapsula_id;
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private CafeteiraTipoEnum tipocapsula_tipo;
     @Column(nullable = false)
@@ -33,10 +36,11 @@ public class TipoCapsulaModel {
     private LocalDateTime tipocapsula_dthrinativacao;
     @OneToMany(mappedBy = "tipoCapsulaModel")
     private List<CapsulaModel> capsulaModel;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cafeteiratpcapsula", joinColumns = @JoinColumn(name = "tipocapsula_id", referencedColumnName = "tipocapsula_id"), inverseJoinColumns = @JoinColumn(name = "cafeteira_id", referencedColumnName = "cafeteira_id"))
-    private List<CafeteiraModel> cafeteiraList;
+    // @ManyToMany(cascade = CascadeType.ALL)
+    // @JoinTable(name = "cafeteiratpcapsula", joinColumns = @JoinColumn(name = "tipocapsula_id", referencedColumnName = "tipocapsula_id"), inverseJoinColumns = @JoinColumn(name = "cafeteira_id", referencedColumnName = "cafeteira_id"))
+    // private List<CafeteiraModel> cafeteiraList;
+    @OneToMany(mappedBy = "tipoCapsulaModel")
+    private List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList;
 
     public Long getId() {
         return tipocapsula_id;
@@ -78,12 +82,12 @@ public class TipoCapsulaModel {
         this.capsulaModel = capsulaModel;
     }
 
-    public List<CafeteiraModel> getCafeteiraList() {
-        return cafeteiraList;
+    public List<CafeteiraTipoCapsulaModel> getCafeteiraTipoCapsulaList() {
+        return cafeteiraTipoCapsulaList;
     }
 
-    public void setCafeteiraList(List<CafeteiraModel> cafeteiraList) {
-        this.cafeteiraList = cafeteiraList;
+    public void setCafeteiraTipoCapsulaList(List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList) {
+        this.cafeteiraTipoCapsulaList = cafeteiraTipoCapsulaList;
     }
 
 }
