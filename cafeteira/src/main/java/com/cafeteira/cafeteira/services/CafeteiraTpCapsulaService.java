@@ -1,10 +1,12 @@
 package com.cafeteira.cafeteira.services;
 
+import org.springframework.stereotype.Service;
+
 import com.cafeteira.cafeteira.models.CafeteiraTipoCapsulaModel;
 import com.cafeteira.cafeteira.repositories.CafeteiraTpCapsulaRepository;
 
 import jakarta.transaction.Transactional;
-
+@Service
 public class CafeteiraTpCapsulaService {
     final CafeteiraTpCapsulaRepository cafeteiraTpCapsulaRepository;
 

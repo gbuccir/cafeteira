@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cafeteira.cafeteira.DTOs.CafeteiraDTO;
+import com.cafeteira.cafeteira.dtos.CafeteiraDTO;
 import com.cafeteira.cafeteira.models.CafeteiraModel;
 import com.cafeteira.cafeteira.models.CafeteiraTipoCapsulaModel;
 import com.cafeteira.cafeteira.services.CafeteiraService;
@@ -33,24 +33,27 @@ public class CafeteiraController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> saveCafeteira(@RequestBody @Valid CafeteiraDTO cafeteiraDTO) {
-        //TODO verificacoes
-        //TODO Testar
+    public ResponseEntity<Object> saveCafeteira(@RequestBody /* @Valid */ CafeteiraDTO cafeteiraDTO) {
+        // TODO verificacoes
+        // TODO Testar
+        try {
+            var cafeteiraModel = new CafeteiraModel();
+            var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel();
+            BeanUtils.copyProperties(cafeteiraDTO, cafeteiraModel);
+            cafeteiraModel.setDthrcadastro(LocalDateTime.now(ZoneId.of("UTC")));
+            var result = cafeteiraService.save(cafeteiraModel);
 
-        var cafeteiraModel = new CafeteiraModel();
-        var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel();
-        BeanUtils.copyProperties(cafeteiraDTO, cafeteiraModel);
-        cafeteiraModel.setDthrcadastro(LocalDateTime.now(ZoneId.of("UTC")));
-        var result = cafeteiraService.save(cafeteiraModel);
+            // var idcapsula = result.getId();
+            for (CafeteiraTipoCapsulaModel c : cafeteiraModel.getCafeteiraTipoCapsulaList()) {
+                cafeteiraTipoCapsulaModel.setTipoCapsulaModel(c.getTipoCapsulaModel());// .getId();
+                cafeteiraTipoCapsulaModel.setCafeteiraModel(result);
+                cafeteiraTpCapsulaService.save(cafeteiraTipoCapsulaModel);
+            }
 
-        //var idcapsula = result.getId();
-        for (CafeteiraTipoCapsulaModel c : cafeteiraModel.getCafeteiraTipoCapsulaList()) {
-            cafeteiraTipoCapsulaModel.setTipoCapsulaModel(c.getTipoCapsulaModel());//.getId();
-            cafeteiraTipoCapsulaModel.setCafeteiraModel(result);
-            cafeteiraTpCapsulaService.save(cafeteiraTipoCapsulaModel);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
 }

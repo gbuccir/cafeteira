@@ -2,8 +2,6 @@ package com.cafeteira.cafeteira.models;
 
 import java.time.LocalDateTime;
 
-import com.cafeteira.cafeteira.enums.CapsulaEdicaoEnum;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
