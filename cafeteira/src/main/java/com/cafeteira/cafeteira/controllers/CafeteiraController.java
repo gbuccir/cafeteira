@@ -18,8 +18,6 @@ import com.cafeteira.cafeteira.models.CafeteiraTipoCapsulaModel;
 import com.cafeteira.cafeteira.services.CafeteiraService;
 import com.cafeteira.cafeteira.services.CafeteiraTpCapsulaService;
 
-import jakarta.validation.Valid;
-
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/cafeteira")
@@ -38,16 +36,18 @@ public class CafeteiraController {
         // TODO Testar
         try {
             var cafeteiraModel = new CafeteiraModel();
-            var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel();
             BeanUtils.copyProperties(cafeteiraDTO, cafeteiraModel);
+
             cafeteiraModel.setDthrcadastro(LocalDateTime.now(ZoneId.of("UTC")));
+            // OK
             var result = cafeteiraService.save(cafeteiraModel);
 
-            // var idcapsula = result.getId();
-            for (CafeteiraTipoCapsulaModel c : cafeteiraModel.getCafeteiraTipoCapsulaList()) {
-                cafeteiraTipoCapsulaModel.setTipoCapsulaModel(c.getTipoCapsulaModel());// .getId();
-                cafeteiraTipoCapsulaModel.setCafeteiraModel(result);
-                cafeteiraTpCapsulaService.save(cafeteiraTipoCapsulaModel);
+            // var _result = this.saveCafeteiraTipoCapsula(cafeteiraDTO, cafeteiraModel);
+            for (var source : cafeteiraDTO.getCafeteiraTipoCapsulaList()) {
+                var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel(source.getTipocapsula_id(),
+                        cafeteiraModel.getCafeteira_id());
+                // NOK
+                cafeteiraTpCapsulaService.createCafeteiraTpCapsula(cafeteiraTipoCapsulaModel);
             }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
@@ -55,5 +55,20 @@ public class CafeteiraController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
     }
+
+    // private ResponseEntity<Object> saveCafeteiraTipoCapsula(CafeteiraDTO cafeteiraDTO, CafeteiraModel cafeteiraModel) {
+    //     try {
+    //         for (var source : cafeteiraDTO.getCafeteiraTipoCapsulaList()) {
+    //             var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel(source.getTipocapsula_id(),
+    //                     cafeteiraModel.getCafeteira_id());
+    //             // NOK
+    //             var result = cafeteiraTpCapsulaService.save(cafeteiraTipoCapsulaModel);
+    //         }
+
+    //         return ResponseEntity.status(HttpStatus.CREATED).body(true);
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+    //     }
+    // }
 
 }

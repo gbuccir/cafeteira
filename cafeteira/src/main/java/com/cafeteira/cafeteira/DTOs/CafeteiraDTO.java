@@ -5,15 +5,17 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CafeteiraDTO {
 
     @NotBlank
     @Size(max = 50)
-    private String cafeteira_nome;
+    private @JsonProperty("cafeteira_nome") String cafeteira_nome;
     @Size(max = 50)
-    private String cafeteira_cor;
+    private @JsonProperty("cafeteira_cor") String cafeteira_cor;
     @Size(max = 50)
-    private String cafeteira_modelo;
+    private @JsonProperty("cafeteira_modelo") String cafeteira_modelo;
     @NotBlank
     private List<CafeteiraTipoCapsulaDTO> cafeteiraTipoCapsulaList;
 

@@ -8,7 +8,6 @@ import com.cafeteira.cafeteira.repositories.CafeteiraRepository;
 import jakarta.transaction.Transactional;
 @Service
 public class CafeteiraService {
-
     final CafeteiraRepository cafeteiraRepository;
 
     public CafeteiraService(CafeteiraRepository cafeteiraRepository) {

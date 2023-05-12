@@ -7,11 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
+
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cafeteiratipocapsula")
+// @NamedQuery(name="createCafeteiraTpCapsula", query="insert into cafeteiratipocapsula (cafeteira_id, tipocapsula_id) VALUES (:cafeteira_id, :tipocapsula_id)")
 public class CafeteiraTipoCapsulaModel {
 
     @Id
@@ -19,31 +21,17 @@ public class CafeteiraTipoCapsulaModel {
     @Column(columnDefinition = "serial")
     private Long caftpcap_id;
 
-    @ManyToOne
-    @MapsId("tipocapsula_id")
+    @ManyToOne(targetEntity = TipoCapsulaModel.class)
+    // @MapsId("tipocapsula_id")
     @JoinColumn(name = "tipocapsula_id")
-    private TipoCapsulaModel tipoCapsulaModel;
+    private Long tipoCapsulaModel;
+    // private TipoCapsulaModel tipoCapsulaModel;
 
-    @ManyToOne
-    @MapsId("cafeteira_id")
+    @ManyToOne(targetEntity = CafeteiraModel.class)
+    // @MapsId("cafeteira_id")
     @JoinColumn(name = "cafeteira_id")
-    private CafeteiraModel cafeteiraModel;
-
-    public TipoCapsulaModel getTipoCapsulaModel() {
-        return tipoCapsulaModel;
-    }
-
-    public void setTipoCapsulaModel(TipoCapsulaModel tipoCapsulaModel) {
-        this.tipoCapsulaModel = tipoCapsulaModel;
-    }
-
-    public CafeteiraModel getCafeteiraModel() {
-        return cafeteiraModel;
-    }
-
-    public void setCafeteiraModel(CafeteiraModel cafeteiraModel) {
-        this.cafeteiraModel = cafeteiraModel;
-    }
+    private Long cafeteiraModel;
+    // private CafeteiraModel cafeteiraModel;
 
     public Long getCaftpcap_id() {
         return caftpcap_id;
@@ -53,41 +41,49 @@ public class CafeteiraTipoCapsulaModel {
         this.caftpcap_id = caftpcap_id;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((caftpcap_id == null) ? 0 : caftpcap_id.hashCode());
-        result = prime * result + ((tipoCapsulaModel == null) ? 0 : tipoCapsulaModel.hashCode());
-        result = prime * result + ((cafeteiraModel == null) ? 0 : cafeteiraModel.hashCode());
-        return result;
+    public Long getTipocapsula_id() {
+        return tipoCapsulaModel;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CafeteiraTipoCapsulaModel other = (CafeteiraTipoCapsulaModel) obj;
-        if (caftpcap_id == null) {
-            if (other.caftpcap_id != null)
-                return false;
-        } else if (!caftpcap_id.equals(other.caftpcap_id))
-            return false;
-        if (tipoCapsulaModel == null) {
-            if (other.tipoCapsulaModel != null)
-                return false;
-        } else if (!tipoCapsulaModel.equals(other.tipoCapsulaModel))
-            return false;
-        if (cafeteiraModel == null) {
-            if (other.cafeteiraModel != null)
-                return false;
-        } else if (!cafeteiraModel.equals(other.cafeteiraModel))
-            return false;
-        return true;
+    public void setTipocapsula_id(Long tipocapsula_id) {
+        this.tipoCapsulaModel = tipocapsula_id;
     }
+
+    public Long getCafeteira_id() {
+        return cafeteiraModel;
+    }
+
+    public void setCafeteira_id(Long cafeteira_id) {
+        this.cafeteiraModel = cafeteira_id;
+    }
+
+    public CafeteiraTipoCapsulaModel(Long tipocapsula_id, Long cafeteira_id) {
+        this.tipoCapsulaModel = tipocapsula_id;
+        this.cafeteiraModel = cafeteira_id;
+    }
+
+    public CafeteiraTipoCapsulaModel() {
+    }
+
+    // public CafeteiraTipoCapsulaModel(TipoCapsulaModel tipoCapsulaModel, CafeteiraModel cafeteiraModel) {
+    //     this.tipoCapsulaModel = tipoCapsulaModel;
+    //     this.cafeteiraModel = cafeteiraModel;
+    // }
+
+    // public TipoCapsulaModel getTipoCapsulaModel() {
+    //     return tipoCapsulaModel;
+    // }
+
+    // public void setTipoCapsulaModel(TipoCapsulaModel tipoCapsulaModel) {
+    //     this.tipoCapsulaModel = tipoCapsulaModel;
+    // }
+
+    // public CafeteiraModel getCafeteiraModel() {
+    //     return cafeteiraModel;
+    // }
+
+    // public void setCafeteiraModel(CafeteiraModel cafeteiraModel) {
+    //     this.cafeteiraModel = cafeteiraModel;
+    // }
 
 }

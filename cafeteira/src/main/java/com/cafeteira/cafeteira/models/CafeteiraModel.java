@@ -38,6 +38,62 @@ public class CafeteiraModel{
         return cafeteira_id;
     }
 
+    public List<CafeteiraTipoCapsulaModel> getCafeteiraTipoCapsulaList() {
+        return cafeteiraTipoCapsulaList;
+    }
+
+    public void setCafeteiraTipoCapsulaList(List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList) {
+        this.cafeteiraTipoCapsulaList = cafeteiraTipoCapsulaList;
+    }
+
+    public Long getCafeteira_id() {
+        return cafeteira_id;
+    }
+
+    public void setCafeteira_id(Long cafeteira_id) {
+        this.cafeteira_id = cafeteira_id;
+    }
+
+    public String getCafeteira_nome() {
+        return cafeteira_nome;
+    }
+
+    public void setCafeteira_nome(String cafeteira_nome) {
+        this.cafeteira_nome = cafeteira_nome;
+    }
+
+    public String getCafeteira_cor() {
+        return cafeteira_cor;
+    }
+
+    public void setCafeteira_cor(String cafeteira_cor) {
+        this.cafeteira_cor = cafeteira_cor;
+    }
+
+    public String getCafeteira_modelo() {
+        return cafeteira_modelo;
+    }
+
+    public void setCafeteira_modelo(String cafeteira_modelo) {
+        this.cafeteira_modelo = cafeteira_modelo;
+    }
+
+    public LocalDateTime getCafeteira_dthrcadastro() {
+        return cafeteira_dthrcadastro;
+    }
+
+    public void setCafeteira_dthrcadastro(LocalDateTime cafeteira_dthrcadastro) {
+        this.cafeteira_dthrcadastro = cafeteira_dthrcadastro;
+    }
+
+    public LocalDateTime getCafeteira_dthrinativacao() {
+        return cafeteira_dthrinativacao;
+    }
+
+    public void setCafeteira_dthrinativacao(LocalDateTime cafeteira_dthrinativacao) {
+        this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
+    }
+
     public void setId(Long cafeteira_id) {
         this.cafeteira_id = cafeteira_id;
     }
@@ -82,13 +138,6 @@ public class CafeteiraModel{
         this.cafeteira_dthrinativacao = cafeteira_dthrinativacao;
     }
 
-    public List<CafeteiraTipoCapsulaModel> getCafeteiraTipoCapsulaList() {
-        return cafeteiraTipoCapsulaList;
-    }
-
-    public void setCafeteiraTipoCapsulaList(List<CafeteiraTipoCapsulaModel> cafeteiraTipoCapsulaList) {
-        this.cafeteiraTipoCapsulaList = cafeteiraTipoCapsulaList;
-    }
 
    
 }
