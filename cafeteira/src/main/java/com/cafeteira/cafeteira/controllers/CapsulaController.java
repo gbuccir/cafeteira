@@ -2,9 +2,11 @@ package com.cafeteira.cafeteira.controllers;
 
 import java.util.Optional;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,17 +31,18 @@ public class CapsulaController {
     @PatchMapping
     public ResponseEntity<Object> updateCapsula(@PathVariable Long capsulaId, @RequestBody CapsulaDTO capsulaDto) {
         try {
-            //var result = new Object();
-            //CapsulaModel capsulaModel = new CapsulaModel();
+            // var result = new Object();
+            // CapsulaModel capsulaModel = new CapsulaModel();
 
             var capsulaModel = new CapsulaModel();
             capsulaModel.setId(capsulaId);
             capsulaModel.setQuantidade(capsulaDto.getCapsulaQuantidade());
 
             // var capsulaModel = capsulaService.findById(capsulaId);
-            // ((CapsulaModel) capsulaModel).setQuantidade(capsulaDto.getCapsulaQuantidade());
+            // ((CapsulaModel)
+            // capsulaModel).setQuantidade(capsulaDto.getCapsulaQuantidade());
 
-            if(capsulaService.updateQuantidade(capsulaModel.getId(), capsulaModel.getQuantidade()) == 0){
+            if (capsulaService.updateQuantidade(capsulaModel.getId(), capsulaModel.getQuantidade()) == 0) {
                 throw new Exception("Objeto nao encontrado");
             }
             return ResponseEntity.status(HttpStatus.CREATED).body("Capsula atualizada");
@@ -48,8 +51,25 @@ public class CapsulaController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Object> searchCapsula(@PathVariable String barcode) {
+        try {
+            var capsulaModel = new CapsulaModel();
+
+            BeanUtils.copyProperties(capsulaService.findBarcode(barcode), capsulaModel);
+
+            if (capsulaModel != null) {
+                return ResponseEntity.status(HttpStatus.FOUND).body(capsulaModel);
+            }
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(capsulaModel);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+        }
+    }
+
     // private CapsulaModel findCapsulaById(Long capsulaId){
-    //     return capsulaService.findById(capsulaId);
+    // return capsulaService.findById(capsulaId);
     // }
 
 }

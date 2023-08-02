@@ -53,4 +53,14 @@ public class CapsulaService {
         // return capsulaRepository.findById(capsulaId).orElseThrow();
     }
 
+    public CapsulaModel findBarcode(String barcode){
+        var query = entityManager.createNativeQuery("select * from capsula where capsula_barcode = '?'", CapsulaModel.class)
+        .setParameter(1, barcode);
+        var _capsula = query.getSingleResult();
+        
+        System.out.println(_capsula);
+        System.out.println(barcode);
+
+        return (CapsulaModel) _capsula;
+    }
 }
