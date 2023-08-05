@@ -41,6 +41,12 @@ public class CapsulaModel {
     @JoinColumn(name = "edicaocapsula_id")
     private EdicaoCapsulaModel edicaoCapsulaModel;
 
+    @Column
+    private String capsula_barcode;
+    @Column
+    private int capsula_limite;
+
+
     public Long getId() {
         return capsula_id;
     }
@@ -111,5 +117,21 @@ public class CapsulaModel {
 
     public void setQuantidade(int capsula_quantidade) {
         this.capsula_quantidade = capsula_quantidade;
+    }
+
+    public void setBarcode(String barcode){
+        this.capsula_barcode = barcode;
+    }
+
+    public String getBarcode(){
+        return this.capsula_barcode;
+    }
+
+    public void setLimite(int limite){
+        this.capsula_limite = limite;
+    }
+
+    public int getLimite(){
+        return this.capsula_limite;
     }
 }

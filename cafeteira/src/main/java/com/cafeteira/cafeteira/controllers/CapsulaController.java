@@ -19,7 +19,7 @@ import com.cafeteira.cafeteira.services.CapsulaService;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RequestMapping("/capsula/update/{capsulaId}")
+// @RequestMapping("/capsula/update/{capsulaId}")
 public class CapsulaController {
     final CapsulaService capsulaService;
 
@@ -27,9 +27,10 @@ public class CapsulaController {
         this.capsulaService = capsulaService;
     }
 
-    // @PutMapping
+    @RequestMapping("/capsula/updateCapsulaQuantidade/{capsulaId}")
     @PatchMapping
-    public ResponseEntity<Object> updateCapsula(@PathVariable Long capsulaId, @RequestBody CapsulaDTO capsulaDto) {
+    public ResponseEntity<Object> updateCapsulaQuantidade(@PathVariable Long capsulaId,
+            @RequestBody CapsulaDTO capsulaDto) {
         try {
             // var result = new Object();
             // CapsulaModel capsulaModel = new CapsulaModel();
@@ -51,8 +52,9 @@ public class CapsulaController {
         }
     }
 
+    @RequestMapping("/capsula/getCapsulaByCode/{barcode}")
     @GetMapping
-    public ResponseEntity<Object> searchCapsula(@PathVariable String barcode) {
+    public ResponseEntity<Object> getCapsulaByCode(@PathVariable String barcode) {
         try {
             var capsulaModel = new CapsulaModel();
 
@@ -68,8 +70,54 @@ public class CapsulaController {
         }
     }
 
-    // private CapsulaModel findCapsulaById(Long capsulaId){
-    // return capsulaService.findById(capsulaId);
-    // }
+    @RequestMapping("/capsula/getCapsulaList")
+    @GetMapping
+    public ResponseEntity<Object> getCapsulaList() {
+        try {
+            var result = capsulaService.getCapsulaList();
+
+            return ResponseEntity.status(HttpStatus.FOUND).body(result);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+        }
+    }
+
+    @RequestMapping("/capsula/updateCapsulaCode/{capsulaId}")
+    @PatchMapping
+    public ResponseEntity<Object> updateCapsulaCode(@PathVariable Long capsulaId,
+            @RequestBody String barcode) {
+        try {
+
+            var capsulaModel = new CapsulaModel();
+            capsulaModel.setId(capsulaId);
+            capsulaModel.setBarcode(barcode);
+
+            if (capsulaService.updateBarcode(capsulaModel.getId(), capsulaModel.getBarcode()) == 0) {
+                throw new Exception("Objeto nao encontrado");
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).body("Capsula atualizada");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+        }
+    }
+
+    @RequestMapping("/capsula/updateCapsulaLimite/{capsulaId}")
+    @PatchMapping
+    public ResponseEntity<Object> updateCapsulaLimite(@PathVariable Long capsulaId, @RequestBody int capsulaLimite) {
+        try {
+
+            var capsulaModel = new CapsulaModel();
+            capsulaModel.setId(capsulaId);
+            capsulaModel.setLimite(capsulaLimite);
+
+            if (capsulaService.updateCapsulaLimite(capsulaModel.getId(), capsulaModel.getLimite()) == 0) {
+                throw new Exception("Objeto nao encontrado");
+            }
+            return ResponseEntity.status(HttpStatus.CREATED).body("Capsula atualizada");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+        }
+    }
 
 }

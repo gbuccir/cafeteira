@@ -11,11 +11,12 @@ import com.cafeteira.cafeteira.repositories.CapsulaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+
 @Service
 public class CapsulaService {
     @PersistenceContext
     final EntityManager entityManager = null;
-    
+
     final CapsulaRepository capsulaRepository;
 
     public CapsulaService(CapsulaRepository capsulaRepository) {
@@ -28,23 +29,26 @@ public class CapsulaService {
     }
 
     @Transactional
-    public int updateQuantidade(Long id, int quantidade){
+    public int updateQuantidade(Long id, int quantidade) {
         // var id = capsulaModel.getId();
         // var quantidade = capsulaModel.getQuantidade();
-        return entityManager.createNativeQuery("UPDATE capsula SET capsula_quantidade=:capsula_quantidade WHERE capsula_id=:capsula_id", CapsulaModel.class)
-        .setParameter("capsula_quantidade", quantidade)
-        .setParameter("capsula_id", id.intValue())
-        .executeUpdate();
-        //return capsulaRepository.save(capsulaModel);
+        return entityManager
+                .createNativeQuery(
+                        "UPDATE capsula SET capsula_quantidade=:capsula_quantidade WHERE capsula_id=:capsula_id",
+                        CapsulaModel.class)
+                .setParameter("capsula_quantidade", quantidade)
+                .setParameter("capsula_id", id.intValue())
+                .executeUpdate();
+        // return capsulaRepository.save(capsulaModel);
         // return capsulaRepository.updateQuantidade(capsulaModel.getQuantidade());
     }
 
     @Transactional
-    public CapsulaModel findById(Long capsulaId){
+    public CapsulaModel findById(Long capsulaId) {
         var query = entityManager.createNativeQuery("select * from capsula where capsula_id = ?", CapsulaModel.class)
-        .setParameter(1, capsulaId);
+                .setParameter(1, capsulaId);
         var _capsula = query.getSingleResult();
-        
+
         System.out.println(_capsula);
         System.out.println(capsulaId);
 
@@ -53,14 +57,44 @@ public class CapsulaService {
         // return capsulaRepository.findById(capsulaId).orElseThrow();
     }
 
-    public CapsulaModel findBarcode(String barcode){
-        var query = entityManager.createNativeQuery("select * from capsula where capsula_barcode = '?'", CapsulaModel.class)
-        .setParameter(1, barcode);
+    public CapsulaModel findBarcode(String barcode) {
+        var query = entityManager
+                .createNativeQuery("select * from capsula where capsula_barcode = '?'", CapsulaModel.class)
+                .setParameter(1, barcode);
         var _capsula = query.getSingleResult();
-        
+
         System.out.println(_capsula);
         System.out.println(barcode);
 
         return (CapsulaModel) _capsula;
     }
+
+    @SuppressWarnings("unchecked")
+    public List<CapsulaModel> getCapsulaList() {
+        var query = entityManager.createNativeQuery("select * from cafeteira", CapsulaModel.class);
+        var _capsulaList = query.getResultList();
+
+        return _capsulaList;
+    }
+
+    public int updateBarcode(Long capsula_id, String capsula_barcode) {
+        return entityManager
+                .createNativeQuery(
+                        "UPDATE capsula SET capsula_barcode=:capsula_barcode WHERE capsula_id=:capsula_id",
+                        CapsulaModel.class)
+                .setParameter("capsula_quantidade", capsula_barcode)
+                .setParameter("capsula_id", capsula_id.intValue())
+                .executeUpdate();
+    }
+
+    public int updateCapsulaLimite(Long capsula_id, int capsula_limite) {
+        return entityManager
+                .createNativeQuery(
+                        "UPDATE capsula SET capsula_limite=:capsula_limite WHERE capsula_id=:capsula_id",
+                        CapsulaModel.class)
+                .setParameter("capsula_limite", capsula_limite)
+                .setParameter("capsula_id", capsula_id.intValue())
+                .executeUpdate();
+    }
+    
 }
