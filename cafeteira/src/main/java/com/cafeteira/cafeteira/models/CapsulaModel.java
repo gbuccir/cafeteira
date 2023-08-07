@@ -43,7 +43,7 @@ public class CapsulaModel {
 
     @Column
     private String capsula_barcode;
-    @Column
+    @Column(nullable = true)
     private int capsula_limite;
 
 

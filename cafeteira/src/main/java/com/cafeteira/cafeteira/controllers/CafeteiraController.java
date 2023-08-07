@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafeteira.cafeteira.dtos.CafeteiraDTO;
+import com.cafeteira.cafeteira.dtos.CafeteiraTipoCapsulaResponseDTO;
 import com.cafeteira.cafeteira.models.CafeteiraModel;
 import com.cafeteira.cafeteira.models.CafeteiraTipoCapsulaModel;
 import com.cafeteira.cafeteira.services.CafeteiraService;
@@ -32,6 +33,9 @@ public class CafeteiraController {
         this.cafeteiraTpCapsulaService = cafeteiraTpCapsulaService;
     }
 
+    
+    /////Teste = [X] 
+
     @RequestMapping("/cafeteira/listCafeteira")
     @GetMapping
     public ResponseEntity<Object> listCafeteira() {
@@ -43,6 +47,9 @@ public class CafeteiraController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
     }
+
+    
+    /////Teste = [ ] 
 
     @RequestMapping("/cafeteira/saveCafeteira")
     @PostMapping
@@ -58,18 +65,21 @@ public class CafeteiraController {
             var result = cafeteiraService.save(cafeteiraModel);
 
             // var _result = this.saveCafeteiraTipoCapsula(cafeteiraDTO, cafeteiraModel);
-            for (var source : cafeteiraDTO.getCafeteiraTipoCapsulaList()) {
-                var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel(source.getTipocapsula_id(),
-                        cafeteiraModel.getCafeteira_id());
-                // NOK
-                cafeteiraTpCapsulaService.createCafeteiraTpCapsula(cafeteiraTipoCapsulaModel);
-            }
+            // for (var source : cafeteiraDTO.getCafeteiraTipoCapsulaList()) {
+            //     var cafeteiraTipoCapsulaModel = new CafeteiraTipoCapsulaModel(source.getTipocapsula_id(),
+            //             cafeteiraModel.getCafeteira_id());
+            //     // NOK
+            //     cafeteiraTpCapsulaService.createCafeteiraTpCapsula(cafeteiraTipoCapsulaModel);
+            // }
 
             return ResponseEntity.status(HttpStatus.CREATED).body(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
     }
+
+
+    /////Teste = [ ] 
 
     @RequestMapping("/cafeteira/listCapsulaByCafeteiraTp/{capsulaId}")
     @GetMapping
@@ -82,24 +92,4 @@ public class CafeteiraController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
     }
-
-
-    // private ResponseEntity<Object> saveCafeteiraTipoCapsula(CafeteiraDTO
-    // cafeteiraDTO, CafeteiraModel cafeteiraModel) {
-    // try {
-    // for (var source : cafeteiraDTO.getCafeteiraTipoCapsulaList()) {
-    // var cafeteiraTipoCapsulaModel = new
-    // CafeteiraTipoCapsulaModel(source.getTipocapsula_id(),
-    // cafeteiraModel.getCafeteira_id());
-    // // NOK
-    // var result = cafeteiraTpCapsulaService.save(cafeteiraTipoCapsulaModel);
-    // }
-
-    // return ResponseEntity.status(HttpStatus.CREATED).body(true);
-    // } catch (Exception e) {
-    // return
-    // ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
-    // }
-    // }
-
 }

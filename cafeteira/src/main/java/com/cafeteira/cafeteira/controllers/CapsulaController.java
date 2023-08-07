@@ -27,6 +27,9 @@ public class CapsulaController {
         this.capsulaService = capsulaService;
     }
 
+
+    /////Teste = [ ] 
+
     @RequestMapping("/capsula/updateCapsulaQuantidade/{capsulaId}")
     @PatchMapping
     public ResponseEntity<Object> updateCapsulaQuantidade(@PathVariable Long capsulaId,
@@ -52,6 +55,9 @@ public class CapsulaController {
         }
     }
 
+
+    /////Teste = [ ] 
+
     @RequestMapping("/capsula/getCapsulaByCode/{barcode}")
     @GetMapping
     public ResponseEntity<Object> getCapsulaByCode(@PathVariable String barcode) {
@@ -70,6 +76,9 @@ public class CapsulaController {
         }
     }
 
+
+    /////Teste = [ ] 
+
     @RequestMapping("/capsula/getCapsulaList")
     @GetMapping
     public ResponseEntity<Object> getCapsulaList() {
@@ -82,6 +91,9 @@ public class CapsulaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
         }
     }
+
+    
+    /////Teste = [ ] 
 
     @RequestMapping("/capsula/updateCapsulaCode/{capsulaId}")
     @PatchMapping
@@ -102,6 +114,9 @@ public class CapsulaController {
         }
     }
 
+
+    /////Teste = [ ] 
+    
     @RequestMapping("/capsula/updateCapsulaLimite/{capsulaId}")
     @PatchMapping
     public ResponseEntity<Object> updateCapsulaLimite(@PathVariable Long capsulaId, @RequestBody int capsulaLimite) {

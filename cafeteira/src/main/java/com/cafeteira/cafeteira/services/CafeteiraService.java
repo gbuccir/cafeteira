@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cafeteira.cafeteira.dtos.CafeteiraDTO;
+import com.cafeteira.cafeteira.dtos.CafeteiraTipoCapsulaResponseDTO;
 import com.cafeteira.cafeteira.models.CafeteiraModel;
 import com.cafeteira.cafeteira.models.CapsulaModel;
 import com.cafeteira.cafeteira.repositories.CafeteiraRepository;
@@ -29,9 +31,15 @@ public class CafeteiraService {
     }
 
     @SuppressWarnings("unchecked")
-    public List<CafeteiraModel> getCafeteiraList() {
-        var query = entityManager.createNativeQuery("select * from cafeteira", CafeteiraModel.class);
-        var _cafeteiraList = query.getResultList();
+    public List<CafeteiraDTO> getCafeteiraList() {
+        var query = entityManager.createNativeQuery("select c.cafeteira_nome, c.cafeteira_cor, c.cafeteira_modelo, caftp.tipocapsula_id  from cafeteira c \r\n" + //
+                "join cafeteiratipocapsula as caftp ON caftp.cafeteira_id = c.cafeteira_id");
+        //var _cafeteiraList = query.getResultList();
+        
+        List<CafeteiraDTO> _cafeteiraList = (List<CafeteiraDTO>) query.getResultList();
+
+        // System.out.println(query.toString());
+        // System.out.println(_cafeteiraList1);
 
         return _cafeteiraList;
     }

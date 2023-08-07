@@ -69,11 +69,8 @@ public class CapsulaService {
         return (CapsulaModel) _capsula;
     }
 
-    @SuppressWarnings("unchecked")
     public List<CapsulaModel> getCapsulaList() {
-        var query = entityManager.createNativeQuery("select * from cafeteira", CapsulaModel.class);
-        var _capsulaList = query.getResultList();
-
+        var _capsulaList = capsulaRepository.findAll();
         return _capsulaList;
     }
 

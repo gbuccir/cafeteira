@@ -15,5 +15,7 @@ public enum CafeteiraTipoEnum {
         return cafeteiraTipo;
     }
 
-    //construtor?
+    public void setCafeteiraTipo(int cafeteiraTipo){
+        this.cafeteiraTipo = cafeteiraTipo;
+    }
 }
